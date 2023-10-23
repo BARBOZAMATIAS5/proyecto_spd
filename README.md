@@ -58,7 +58,7 @@ https://www.tinkercad.com/things/fDUVDTE0yT6
 El proyecto presentado muestra un contador, mostrados a traves de dos displays de 7 segmentos, del 0 al 99, usando la técnica de la multiplexación, combinando dos señales para mostrar dentro de una numeros de dos dígitos. En este caso, usaremos un sensor de flexión para cambiar el numero mostrado, y, ademas un interruptor que si mostrar el contador de a uno, o solo numeros primos.
 
 # Cambios realizados:
--- Se eliminaron asignaciones por #define, inicializaciones y funciones relacionadas a los usos de los pulsadores como pulsadorEstado.
+ - Se eliminaron asignaciones por #define, inicializaciones y funciones relacionadas a los usos de los pulsadores como pulsadorEstado.
 
 Se agregaron 
 
