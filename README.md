@@ -1,9 +1,14 @@
+# Alumno
+- Barboza Matias Gabriel
+
 # Proyecto SPD
+
+![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/b779da4b-024a-4b7d-8548-71052facff5a)
 
 El proyecto presentado muestra un contador, mostrados a traves de dos displays de 7 segmentos, del 0 al 99, usando la técnica de la multiplexación, combinando dos señales y transmitiendo por un solo medio.
 
 # FUNCIONES:
-- En primera instancia del código, asocio a través de #define, los nombres de los componentes que están conectados al ARDUINO, al igual que la inicialización de variables que ayudaran para el funcionamiento del contador.
+- En primera instancia del código, asocio a través de #define, los nombres de los componentes que están conectados al ARDUINO, ademas tambien inicializo variables que ayudaran para el funcionamiento del contador.
 
 ![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/e2c013b3-98dc-4743-af33-4af29031a8aa)
 
