@@ -48,8 +48,8 @@ El proyecto presentado muestra un contador, mostrados a traves de dos displays d
 ![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/17f084b8-a64e-4d04-a974-3896d9a376af)
 
 
-----------------------------------
-# LINK PROYECTO:
+
+# LINK PROYECTO PRIMERA PARTE:
 
 https://www.tinkercad.com/things/fDUVDTE0yT6
 
@@ -121,5 +121,14 @@ El funcionamiento del motor CC en este proyecto serviría para aumentar o dismin
 - Fuente MOTOR CC:
   
   https://bricolabs.cc/wiki/guias/control_de_motores
+  
   https://www.zuendo.com/smartblog/26_Motores-cc-ventajas-inconvenientes.html
+  
   https://www.youtube.com/watch?v=kr5qde6IIRk
+
+
+# LINK PROYECTO SEGUNDA PARTE: 
+
+https://www.tinkercad.com/things/3W6JRwTJtOc
+
+----------------------------------
