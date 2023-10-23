@@ -1,8 +1,9 @@
+----------------------------------
 # Alumno
 
 - Barboza Matias Gabriel
 
-
+----------------------------------
 # Proyecto SPD: Primera parte 
 
 El proyecto presentado muestra un contador, mostrados a traves de dos displays de 7 segmentos, del 0 al 99, usando la técnica de la multiplexación, combinando dos señales para mostrar dentro de una numeros de dos dígitos. Se usarán pulsadores para aumentar, disminuir o reestablecer el contador a 0.
@@ -10,7 +11,7 @@ El proyecto presentado muestra un contador, mostrados a traves de dos displays d
 ![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/b779da4b-024a-4b7d-8548-71052facff5a)
 
 
-
+----------------------------------
 # FUNCIONES
 - En primera instancia del código, asocio a través de #define, los nombres de los componentes que están conectados al ARDUINO, ademas tambien inicializo variables que ayudaran para el funcionamiento del contador.
 
@@ -46,24 +47,32 @@ El proyecto presentado muestra un contador, mostrados a traves de dos displays d
 
 ![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/17f084b8-a64e-4d04-a974-3896d9a376af)
 
+
+----------------------------------
 # LINK PROYECTO:
 
 https://www.tinkercad.com/things/fDUVDTE0yT6
 
 
 
-
+----------------------------------
 # Proyecto SPD: Segunda parte
 
 El proyecto presentado muestra un contador, mostrados a traves de dos displays de 7 segmentos, del 0 al 99, usando la técnica de la multiplexación, combinando dos señales para mostrar dentro de una numeros de dos dígitos. En este caso, usaremos un sensor de flexión para cambiar el numero mostrado, y, ademas un interruptor que si mostrar el contador de a uno, o solo numeros primos.
 
-# Cambios realizados:
- - Se eliminaron asignaciones por #define, inicializaciones y funciones relacionadas a los usos de los pulsadores como pulsadorEstado.
-
-Se agregaron 
-
 ![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/999f957c-7394-4ccb-bcf5-8300cde4ae0b)
 
+----------------------------------
+
+# Cambios realizados:
+Se eliminaron asignaciones por #define, inicializaciones y funciones relacionadas a los usos de los pulsadores como pulsadorEstado.
+
+Se agregaron nuevos componentes como el switch y el sensor de flexion.
+
+![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/e8998330-d731-4c48-959d-8a27804d6625)
+
+
+----------------------------------
 # FUNCIONES
 
 - Empezamos asociamos a traves de #define a los pines que representan cada componente del proyecto, y tambien inicializamos variables.
@@ -100,7 +109,7 @@ Se agregaron
 
 ![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/6cb40226-0a7a-4791-b932-4ca0bdd12e56)
 
-
+----------------------------------
 # INVESTIGACION acerca del MOTOR CC
 
 El motor CC es una máquina que convierte energía eléctrica en mecánica, provocando un movimiento rotatorio, gracias a la acción de un campo magnético. 
@@ -108,15 +117,9 @@ Podemos controlar la rotación del componente a través de sus terminales, depen
 
 El funcionamiento del motor CC en este proyecto serviría para aumentar o disminuir el contador a través de pulsadores sin la necesidad de tener que pulsar para que suba o baje, si no que cada pulsación aumente la velocidad de crecimiento o decrecimiento, usando dos pulsadores para ello y, uno reestablecer el contador a 0 y apagar el motor CC.
 
-# INVESTIGACION acerca del SENSOR DE FLEXIÓN
-
 
 - Fuente MOTOR CC:
   
   https://bricolabs.cc/wiki/guias/control_de_motores
   https://www.zuendo.com/smartblog/26_Motores-cc-ventajas-inconvenientes.html
   https://www.youtube.com/watch?v=kr5qde6IIRk
-
-
-- Fuente SENSOR DE FLEXION:
-- 
