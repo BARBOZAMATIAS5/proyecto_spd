@@ -1,7 +1,7 @@
 # Alumno
 - Barboza Matias Gabriel
 
-# Proyecto SPD
+# Proyecto SPD - Primera parte 
 
 ![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/b779da4b-024a-4b7d-8548-71052facff5a)
 
