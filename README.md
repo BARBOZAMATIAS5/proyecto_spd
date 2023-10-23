@@ -46,12 +46,21 @@ El proyecto presentado muestra un contador, mostrados a traves de dos displays d
 
 ![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/17f084b8-a64e-4d04-a974-3896d9a376af)
 
+# LINK PROYECTO:
+
+https://www.tinkercad.com/things/fDUVDTE0yT6
+
 
 
 
 # Proyecto SPD: Segunda parte
 
 El proyecto presentado muestra un contador, mostrados a traves de dos displays de 7 segmentos, del 0 al 99, usando la técnica de la multiplexación, combinando dos señales para mostrar dentro de una numeros de dos dígitos. En este caso, usaremos un sensor de flexión para cambiar el numero mostrado, y, ademas un interruptor que si mostrar el contador de a uno, o solo numeros primos.
+
+# Cambios realizados:
+-- Se eliminaron asignaciones por #define, inicializaciones y funciones relacionadas a los usos de los pulsadores como pulsadorEstado.
+
+Se agregaron 
 
 ![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/999f957c-7394-4ccb-bcf5-8300cde4ae0b)
 
@@ -98,3 +107,16 @@ El motor CC es una máquina que convierte energía eléctrica en mecánica, prov
 Podemos controlar la rotación del componente a través de sus terminales, dependiendo de su conexión y cual de los dos reciba corriente eléctrica. Si se encuentran conectados y recibiendo corriente por los terminales, no se vería ningún resultado por el intento del motor de rotar para ambos sentidos opuestos.
 
 El funcionamiento del motor CC en este proyecto serviría para aumentar o disminuir el contador a través de pulsadores sin la necesidad de tener que pulsar para que suba o baje, si no que cada pulsación aumente la velocidad de crecimiento o decrecimiento, usando dos pulsadores para ello y, uno reestablecer el contador a 0 y apagar el motor CC.
+
+# INVESTIGACION acerca del SENSOR DE FLEXIÓN
+
+
+- Fuente MOTOR CC:
+  
+  https://bricolabs.cc/wiki/guias/control_de_motores
+  https://www.zuendo.com/smartblog/26_Motores-cc-ventajas-inconvenientes.html
+  https://www.youtube.com/watch?v=kr5qde6IIRk
+
+
+- Fuente SENSOR DE FLEXION:
+- 
