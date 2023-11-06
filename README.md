@@ -58,19 +58,24 @@ https://www.tinkercad.com/things/fDUVDTE0yT6
 ----------------------------------
 # Proyecto SPD: Segunda parte
 
-El proyecto presentado muestra un contador, mostrados a traves de dos displays de 7 segmentos, del 0 al 99, usando la técnica de la multiplexación, combinando dos señales para mostrar dentro de una numeros de dos dígitos. En este caso, usaremos un sensor de flexión para cambiar el numero mostrado, y, ademas un interruptor que si mostrar el contador de a uno, o solo numeros primos.
+(describir proyecto)
 
-![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/999f957c-7394-4ccb-bcf5-8300cde4ae0b)
+![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/a364f489-fc89-4408-b3d5-a053545faa95)
+
 
 ----------------------------------
 
 # Cambios realizados:
-Se eliminaron asignaciones por #define, inicializaciones y funciones relacionadas a los usos de los pulsadores como pulsadorEstado.
 
-Se agregaron nuevos componentes como el switch y el sensor de flexion.
+(describir los cambios realizados con respecto del anterior)
 
-![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/e8998330-d731-4c48-959d-8a27804d6625)
+![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/da82dd7d-f415-4549-874e-79ac7dd84953)
 
+*Agregados
+- Switch.
+- Motor CC.
+- Transitor NPN.
+- Sensor de flexion.
 
 ----------------------------------
 # FUNCIONES
@@ -110,7 +115,7 @@ Se agregaron nuevos componentes como el switch y el sensor de flexion.
 ![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/6cb40226-0a7a-4791-b932-4ca0bdd12e56)
 
 ----------------------------------
-# INVESTIGACION acerca del MOTOR CC
+# INVESTIGACION acerca del MOTOR CC - TRANSITOR NPN - SENSOR de FLEXION:
 
 El motor CC es una máquina que convierte energía eléctrica en mecánica, provocando un movimiento rotatorio, gracias a la acción de un campo magnético. 
 Podemos controlar la rotación del componente a través de sus terminales, dependiendo de su conexión y cual de los dos reciba corriente eléctrica. Si se encuentran conectados y recibiendo corriente por los terminales, no se vería ningún resultado por el intento del motor de rotar para ambos sentidos opuestos.
@@ -129,6 +134,65 @@ El funcionamiento del motor CC en este proyecto serviría para aumentar o dismin
 
 # LINK PROYECTO SEGUNDA PARTE: 
 
-https://www.tinkercad.com/things/3W6JRwTJtOc
+https://www.tinkercad.com/things/3ucjSRs74In
 
 ----------------------------------
+
+# Proyecto SPD: Tercera parte
+
+(describir proyecto)
+
+![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/4133c028-6a4b-4d46-8439-b448a1681524)
+
+
+-----------------------------------
+# Cambios realizados:
+
+(describir los cambios realizados)
+
+![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/29d7cb98-8bce-439b-ab76-2411f81d232b)
+
+*Agregados:
+- Fotorresistencia.
+
+------------------------------------
+
+# FUNCIONES
+
+(explicar las nuevas funciones)
+
+----------------------------------
+# INVESTIGACION acerca de la FOTORRESISTENCIA
+
+(investigacion)
+
+
+# LINK PROYECTO TERCERA PARTE:
+
+https://www.tinkercad.com/things/bmz2OQ4oxsI
+
+
+----------------------------------
+# Proyecto SPD: Cuarta parte
+
+(describir proyecto)
+
+![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/986c79df-1330-40c2-8e7a-953560e99cc4)
+
+
+-----------------------------------
+# Cambios realizados:
+
+(describir los cambios realizados)
+
+------------------------------------
+
+# FUNCIONES
+
+(explicar las nuevas funciones)
+
+
+----------------------------------
+# LINK PROYECTO CUARTA PARTE:
+
+https://www.tinkercad.com/things/dcDukXcITqy
