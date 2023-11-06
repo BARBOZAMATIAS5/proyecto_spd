@@ -669,7 +669,7 @@ Un transistor, también conocido como un BJT (Transistor de Unión Bipolar), es 
 
 Un transistor es un componente electrónico que permite el paso de una corriente de salida dando una de entrada. Se activara cuando le demos corriente.
 
-El transistor tiene tres patas: colector, base y emisor. Del colector al emisor pasara la corriente que queremos controlar asi que el colector lo conectaremos al lado positivo de nuestra alimentación; el emisor a nuetro motor. En cuanto a la base, la conectaremos a un extremo de la resistencia y por el otro extremo a algun pin PWM de nuestro arduino. Esto ayudará a controlar la velocidad del motor.
+El transistor tiene tres patas: colector, base y emisor. Del colector al emisor pasara la corriente que queremos controlar asi que el colector lo conectaremos al lado positivo de nuestra alimentación; el emisor a nuetro motor. En cuanto a la base, la conectaremos a un extremo de la resistencia y por el otro extremo a algun pin PWM de nuestro arduino. Esto ayudará a controlar la velocidad del motor, debido se utiliza una pequeña corriente en la base del transistor para controlar una corriente mayor entre el colector y el emisor. Lo cual, en el proyecto, la hacemos variar con la variable 'n'.
 
 
 
