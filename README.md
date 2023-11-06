@@ -6,46 +6,341 @@
 ----------------------------------
 # Proyecto SPD: Primera parte 
 
-El proyecto presentado muestra un contador, mostrados a traves de dos displays de 7 segmentos, del 0 al 99, usando la técnica de la multiplexación, combinando dos señales para mostrar dentro de una numeros de dos dígitos. Se usarán pulsadores para aumentar, disminuir o reestablecer el contador a 0.
+El proyecto presentado muestra un contador a traves de dos displays de 7 segmentos del 0 al 99, usando la técnica de la multiplexación, combinando dos señales para mostrar dentro de una, numeros de dos dígitos. Se usarán pulsadores para aumentar, disminuir o reestablecer a 0, al contador.
 
 ![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/b779da4b-024a-4b7d-8548-71052facff5a)
 
 
 ----------------------------------
 # FUNCIONES
-- En primera instancia del código, asocio a través de #define, los nombres de los componentes que están conectados al ARDUINO, ademas tambien inicializo variables que ayudaran para el funcionamiento del contador.
+- Inicializacion de variables y los #define para agregar los componentes, asociandolos a pines del arduino como tambien, para usarlos como variables constantes.
 
-![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/e2c013b3-98dc-4743-af33-4af29031a8aa)
+~~~ C
+#define PULSADOR_MAS 4
+#define PULSADOR_MENOS 3
+#define PULSADOR_RESET 5
+
+#define PIN_A 12
+#define PIN_B 13
+#define PIN_C 7
+#define PIN_D 8
+#define PIN_E 9
+#define PIN_F 11
+#define PIN_G 10
+
+#define LEDUNIDAD A4
+#define LEDDECENA A5
+#define OFF 0
+
+#define TIEMPODISPLAY 10
+
+int contador = 0;
+int pulsador = 0;
+
+int sumarContador = 1;
+int sumarAnterior = 1;
+
+int restarContador = 1;
+int restarAnterior = 1;
+
+int resetearContador = 1;
+int resetearAnterior = 1;
+~~~
 
 
-- Próximo a ello, se encuentra la primera función “setup()” que se encarga de configurar los pines si pertenecen a INPUT (entradas) o OUTPUT (salidas).
 
-![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/238e4d18-ef78-403e-a45f-c2e60375458e)
+- setup()
+
+Se configuran los pines del sistema si son INPUT (entradas) o OUTPUT (salidas). Aquellas que son configuradas como INPUT_PULL, conectan resistencias internamente de 20kOmhs y +5V, sin la necesidad de componentes externos.
+
+~~~ C
+void setup()
+{
+  pinMode(LEDUNIDAD, OUTPUT);
+  pinMode(LEDDECENA, OUTPUT);
+  pinMode(PIN_A, OUTPUT);
+  pinMode(PIN_B, OUTPUT);
+  pinMode(PIN_C, OUTPUT);
+  pinMode(PIN_D, OUTPUT);
+  pinMode(PIN_E, OUTPUT);
+  pinMode(PIN_F, OUTPUT);
+  pinMode(PIN_G, OUTPUT);
+  pinMode(PULSADOR_MAS, INPUT_PULLUP);
+  pinMode(PULSADOR_MENOS, INPUT_PULLUP);
+  pinMode(PULSADOR_RESET, INPUT_PULLUP);
+
+  Serial.begin(9600);
+}
+~~~
 
 
-- La función “loop()” será donde se ejecute el código continuamente, donde incluirá variables y funciones.
 
-![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/9d8b0cd0-176c-41f5-a4f9-f25e83395c4b)
+- loop()
+
+Se encarga de ejecutar el código continuamente como un bucle.
+
+Dentro de la funcion: 
+'pulsador' mantiene un estado dependiendo del pulsador apretado (PULSADOR_MAS o PULSADO_MENOS).
+
+'mostrarContador(contador)' es una funcion que muestra en los displays el numero que almacena la variable 'contador'.
+
+Se usa la funcion 'if-else' para aumentar o disminuir el numero almacenado en la variable 'contador' y, tambien, como condicionamento de que si esta variable: supera el numero 99, entonces el contador vuelve a 0; o es menor a 0, entonces el contador pasa a 99.
+~~~ C
+void loop()
+{
+  pulsador = pulsadorEstado();
+  
+  mostrarContador(contador);
+  
+  if (pulsador == PULSADOR_MAS)
+  {
+    contador++;
+  }
+  else if (pulsador == PULSADOR_MENOS)
+  {
+  	contador--;  
+  }
+  else if (pulsador == PULSADOR_RESET)
+  {
+    contador = 0;
+  }
+  
+  if (contador > 99)
+  {
+    contador = 0;
+  }
+  else if (contador < 0)
+  {
+    contador = 99;
+  }
+  
+  delay(TIEMPODISPLAY);
+}
+~~~
 
 
-- La función “void numerosContador(int)” mostrará, en los displays de 7 segmentos, los números pasados por parámetro, prendiendo y apagando respectivamente los leds correspondientes que formen ese número (ejemplo recortado hasta case 4).
 
-![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/60acdd14-106b-486e-a952-24edb21025d4)
+- void numerosContador(int)
+
+Muestra en los displays el numero pasado por parametro, prendiendo y apagando los segmentos mediante la funcion 'digitalWrite(NUMERODEPIN, HIGH/LOW)'.
+
+PIN_A - PIN_B - PIN_C - PIN_D - PIN_E - PIN_F - PIN_G -> #define asociado a pines.
+
+Dentro de la función:
+
+Se apagan todos los segmentos que estan asociados a pines.
+
+Se usa la funcion 'switch ()' donde, dependiendo del numero (0 a 9) pasado por parametro, apagará o prenderá los segmentos que conformen la figura de ese número.
+
+~~~ C
+void numerosContador(int contador)
+{
+  digitalWrite(PIN_A, LOW);
+  digitalWrite(PIN_B, LOW);
+  digitalWrite(PIN_C, LOW);
+  digitalWrite(PIN_D, LOW);
+  digitalWrite(PIN_E, LOW);
+  digitalWrite(PIN_F, LOW);
+  digitalWrite(PIN_G, LOW);
+  switch (contador)
+  {
+    case 1:
+      digitalWrite(PIN_A, LOW);
+  	  digitalWrite(PIN_B, HIGH);
+      digitalWrite(PIN_C, HIGH);
+  	  digitalWrite(PIN_D, LOW);
+      digitalWrite(PIN_E, LOW);
+  	  digitalWrite(PIN_F, LOW);
+      digitalWrite(PIN_G, LOW);
+    break;
+    case 2:
+      digitalWrite(PIN_A, HIGH);
+  	  digitalWrite(PIN_B, HIGH);
+      digitalWrite(PIN_C, LOW);
+  	  digitalWrite(PIN_D, HIGH);
+      digitalWrite(PIN_E, HIGH);
+  	  digitalWrite(PIN_F, LOW);
+      digitalWrite(PIN_G, HIGH);
+    break;
+    case 3:
+      digitalWrite(PIN_A, HIGH);
+  	  digitalWrite(PIN_B, HIGH);
+      digitalWrite(PIN_C, HIGH);
+  	  digitalWrite(PIN_D, HIGH);
+      digitalWrite(PIN_E, LOW);
+  	  digitalWrite(PIN_F, LOW);
+      digitalWrite(PIN_G, HIGH);
+    break;
+    case 4:
+      digitalWrite(PIN_A, LOW);
+  	  digitalWrite(PIN_B, HIGH);
+      digitalWrite(PIN_C, HIGH);
+  	  digitalWrite(PIN_D, LOW);
+      digitalWrite(PIN_E, LOW);
+  	  digitalWrite(PIN_F, HIGH);
+      digitalWrite(PIN_G, HIGH);
+    break;
+    case 5:
+      digitalWrite(PIN_A, HIGH);
+  	  digitalWrite(PIN_B, LOW);
+      digitalWrite(PIN_C, HIGH);
+  	  digitalWrite(PIN_D, HIGH);
+      digitalWrite(PIN_E, LOW);
+  	  digitalWrite(PIN_F, HIGH);
+      digitalWrite(PIN_G, HIGH);
+    break;
+    case 6:
+      digitalWrite(PIN_A, HIGH);
+  	  digitalWrite(PIN_B, LOW);
+      digitalWrite(PIN_C, HIGH);
+  	  digitalWrite(PIN_D, HIGH);
+      digitalWrite(PIN_E, HIGH);
+  	  digitalWrite(PIN_F, HIGH);
+      digitalWrite(PIN_G, HIGH);
+    break;
+    case 7:
+      digitalWrite(PIN_A, HIGH);
+    	digitalWrite(PIN_B, HIGH);
+      digitalWrite(PIN_C, HIGH);
+  	  digitalWrite(PIN_D, LOW);
+      digitalWrite(PIN_E, LOW);
+  	  digitalWrite(PIN_F, LOW);
+      digitalWrite(PIN_G, LOW);
+    break;
+    case 8:
+      digitalWrite(PIN_A, HIGH);
+  	  digitalWrite(PIN_B, HIGH);
+      digitalWrite(PIN_C, HIGH);
+  	  digitalWrite(PIN_D, HIGH);
+      digitalWrite(PIN_E, HIGH);
+  	  digitalWrite(PIN_F, HIGH);
+      digitalWrite(PIN_G, HIGH);
+    break;
+    case 9:
+      digitalWrite(PIN_A, HIGH);
+  	  digitalWrite(PIN_B, HIGH);
+      digitalWrite(PIN_C, HIGH);
+  	  digitalWrite(PIN_D, LOW);
+      digitalWrite(PIN_E, LOW);
+  	  digitalWrite(PIN_F, HIGH);
+      digitalWrite(PIN_G, HIGH);
+    break;
+    case 0:
+      digitalWrite(PIN_A, HIGH);
+  	  digitalWrite(PIN_B, HIGH);
+      digitalWrite(PIN_C, HIGH);
+  	  digitalWrite(PIN_D, HIGH);
+      digitalWrite(PIN_E, HIGH);
+  	  digitalWrite(PIN_F, HIGH);
+      digitalWrite(PIN_G, LOW);
+    break;
+  }
+}
+~~~
 
 
-- La función ” void prenderDisplay(int)” tiene como funcionalidad, prender y apagar los displays dependiendo de lo pasado por parámetro (siendo LEDUNIDAD o LEDDECENA, identificadores creados al principio del código del proyecto) e introduciendo un delay para generar un retraso en el prendido y apagado.
 
-![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/b61b106e-9828-481e-9b0a-06255db738f0)
+- 'void prenderDisplay(int)'
+
+Su funcion es prender uno de los dos displays, pasado por parametro, y apagar el contrario, y se le agrega un delay() para que haya una pausa. 
+
+LEDUNIDAD - LEDDECENA -> #define asociados a pines | TIEMPODISPLAY -> #define usado como constante.
+
+Dentro de la función:
+
+Se usa la funcion 'if-else' para prender el display pasado por parametro y apagar el otro durante un lapso de tiempo, dependiendo del valor de TIEMPODISPLAY. Si no se cumplen ninguna de las dos condiciones especificadas, entonces se prenden ambos a la vez.
+
+~~~ C
+void prenderDisplay(int numDisplay)
+{
+  if (numDisplay == LEDUNIDAD)
+  {
+    digitalWrite(LEDUNIDAD, LOW);
+    digitalWrite(LEDDECENA, HIGH);
+    delay(TIEMPODISPLAY);
+  }
+  else if (numDisplay == LEDDECENA)
+  {
+    digitalWrite(LEDDECENA, LOW);
+    digitalWrite(LEDUNIDAD, HIGH);
+    delay(TIEMPODISPLAY);
+  }
+  else
+  {
+    digitalWrite(LEDDECENA, HIGH);
+    digitalWrite(LEDUNIDAD, HIGH);
+  }
+}
+~~~
 
 
-- “mostrarContador(int)” como dice su nombre, se encargará de mostrar en los displays, el numero pasado por parámetro (menor o igual a 99, mayor o igual 0), usando la función “prenderDisplay(int)” y la función “numerosContador(int)”.
 
-![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/16223618-d6e2-4de0-a04c-42703de2cb0a)
+- 'mostrarContador(int)'
+Se encarga de la visualizacion del numero pasado por parametro.
+
+OFF -> #define usado como constante
+
+Dentro de la función:
+
+Se usan funciones que fueron explicadas anteriormente: prenderDisplay() - numerosContador().
+
+Primero se apagan ambos displays con la funcion prenderDisplay() para despues, dentro de la funcion numerosContador(), se hace una operacion en el argumento: 'contador / 10', lo cual mostrará en la decena el resultado -> si 9 / 10 = 0.9, entonces mostrará el 0. Para mostrar en la decena dicho número, se llamará nuevamente a la funcion prenderDisplay() especificando en el argumento LEDDECENA, y se procede a apagar ambos de nuevo. Para mostrar la unidad se llamará otra vez a la funcion numerosContador() con la operacion 'contador-10*((int)contador/10)' -> si 9 - 10*((int)9/10) => 9 - 10*0 => 9-0 = 9. Y por ultimo, se llamará a prenderDisplay() con el argumento LEDUNIDAD.
+
+~~~ C
+void mostrarContador(int contador)
+{
+  prenderDisplay(OFF);
+  numerosContador(contador/10);
+  prenderDisplay(LEDDECENA);
+  prenderDisplay(OFF);
+  numerosContador(contador - 10*((int)contador/10));
+  prenderDisplay(LEDUNIDAD);
+}
+~~~
 
 
-- Y por ultimo se encuentra la función “int pulsadorEstador(void)”, su objetivo es hacer que dependiendo de los tres pulsadores, cual ha sido pulsado y lo devuelve para ser usado en la función “loop()”, dentro de la variable pulsador.
 
-![imagen](https://github.com/BARBOZAMATIAS5/proyecto_spd/assets/117691193/17f084b8-a64e-4d04-a974-3896d9a376af)
+- 'int pulsadorEstador(void)'
+Retorna el pulsador que fue pulsado sin la necesidad de tener que mantener.
+
+~~~ C
+int pulsadorEstado()
+{
+  sumarContador = digitalRead(PULSADOR_MAS);
+  restarContador = digitalRead(PULSADOR_MENOS);
+  resetearContador = digitalRead(PULSADOR_RESET);
+
+  if (sumarContador)
+  {
+    sumarAnterior = 1;
+  }
+  if (restarContador)
+  {
+    restarAnterior = 1;
+  }
+  if (resetearContador)
+  {
+    resetearAnterior = 1;
+  }
+
+  if (sumarContador == 0 && sumarContador != sumarAnterior)
+  {
+    sumarAnterior = sumarContador;
+    return PULSADOR_MAS;
+  }
+  else if (restarContador == 0 && restarContador != restarAnterior)
+  {
+    restarAnterior = restarContador;
+    return PULSADOR_MENOS;
+  }
+  else if (resetearContador == 0 && resetearContador != resetearAnterior)
+  {
+    resetearAnterior = resetearContador;
+    return PULSADOR_RESET;
+  }
+  return 0;
+}
+~~~
 
 
 
