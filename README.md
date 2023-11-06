@@ -240,7 +240,7 @@ void numerosContador(int contador)
 
 
 
-- 'void prenderDisplay(int)'
+- void prenderDisplay(int)
 
 Su funcion es prender uno de los dos displays, pasado por parametro, y apagar el contrario, y se le agrega un delay() para que haya una pausa. 
 
@@ -275,7 +275,7 @@ void prenderDisplay(int numDisplay)
 
 
 
-- 'mostrarContador(int)'
+- mostrarContador(int)
 Se encarga de la visualizacion del numero pasado por parametro.
 
 OFF -> #define usado como constante
@@ -300,8 +300,10 @@ void mostrarContador(int contador)
 
 
 
-- 'int pulsadorEstador(void)'
-Retorna el pulsador que fue pulsado sin la necesidad de tener que mantener.
+- int pulsadorEstador(void)
+Retorna el pin del pulsado que fue pulsado.
+
+Se le atribuyen a las variables: 'sumarContador' = lectura de PULSADOR_MAS, 'restarContador' = lectura de PULSADOR_MENOS, 'resetearContador' = lectura de PULSADOR_RESETEAR 
 
 ~~~ C
 int pulsadorEstado()
