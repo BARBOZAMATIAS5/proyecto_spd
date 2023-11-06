@@ -1,0 +1,333 @@
+#define MOTOR 3
+#define SENSOR_FLEXION A3
+#define SENSOR_LUZ A2
+
+#define PULSADOR_MAS 5
+#define PULSADOR_MENOS 4
+#define SWITCH_CONTADOR 6
+
+#define PIN_A 12
+#define PIN_B 13
+#define PIN_C 7
+#define PIN_D 8
+#define PIN_E 9
+#define PIN_F 11
+#define PIN_G 10
+
+#define OFF 0
+
+#define LEDUNIDAD A4
+#define LEDDECENA A5
+
+#define TIEMPODISPLAY 10
+#define REVOLUCIONES 36
+
+unsigned long tiempo;
+unsigned long tiempo_transcurrido = 0;
+
+int contador = 0;
+int pulsador = 0;
+int contadorPrimo = 0;
+
+int sumarContador = 1;
+int sumarAnterior = 1;
+
+int restarContador = 1;
+int restarAnterior = 1;
+
+int velocidadMotor = 0;
+int sensorFlexion = 0;
+int sensorLuz = 0;
+
+int n = 0;
+int sumarORestar = 2;
+int tiempoContador = 0;
+int tiempoAuxiliar = 0;
+
+int switchContador;
+
+void setup()
+{
+  pinMode(LEDUNIDAD, OUTPUT);
+  pinMode(LEDDECENA, OUTPUT);
+  pinMode(PIN_A, OUTPUT);
+  pinMode(PIN_B, OUTPUT);
+  pinMode(PIN_C, OUTPUT);
+  pinMode(PIN_D, OUTPUT);
+  pinMode(PIN_E, OUTPUT);
+  pinMode(PIN_F, OUTPUT);
+  pinMode(PIN_G, OUTPUT);
+  pinMode(MOTOR, OUTPUT);
+  pinMode(SENSOR_LUZ, INPUT_PULLUP);
+  pinMode(SENSOR_FLEXION, INPUT_PULLUP);
+  pinMode(PULSADOR_MAS, INPUT_PULLUP);
+  pinMode(PULSADOR_MENOS, INPUT_PULLUP);
+  pinMode(SWITCH_CONTADOR, INPUT);
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  tiempo = millis();
+  pulsador = pulsadorEstado();
+  sensorLuz= analogRead(SENSOR_LUZ);
+  switchContador = digitalRead(SWITCH_CONTADOR);
+  sensorFlexion = map(analogRead(SENSOR_FLEXION), 384, 783, 0, 7);
+  n = 1 * REVOLUCIONES *  sensorFlexion;
+  
+  tiempoContador = cambiarTiempo(tiempoContador, sensorLuz);
+  
+  analogWrite(MOTOR, n);
+  
+  if (switchContador == 1)//primo
+  {
+    if (esPrimo(contador))
+    {
+      mostrarContador(contador);
+      contadorPrimo = contador;
+    }
+    else
+    {
+      mostrarContador(contadorPrimo);
+    }
+  }
+  else if(switchContador == 0) //no primo
+  {
+    mostrarContador(contador);
+  }
+  
+  if (tiempo - tiempo_transcurrido > tiempoContador)
+  {
+    tiempo_transcurrido = tiempo;
+    contador = cambiarOperacion(sumarORestar, contador, sensorFlexion);
+  }
+  
+  if (contador > 99)
+  {
+    contador = contador - 100;
+  }
+  else if (contador < 0)
+  {
+    contador = contador + 100;
+  }
+  
+  if (pulsador == PULSADOR_MAS)
+  {
+    sumarORestar = 0;
+  }
+  else if (pulsador == PULSADOR_MENOS)
+  {
+    sumarORestar = 1;
+  }
+  
+  Serial.println(contador);
+  delay(TIEMPODISPLAY);
+}
+
+int cambiarOperacion (int cambio, int contador, int sensor)
+{
+  if (cambio == 0)
+  {
+    contador += sensor;
+  }
+  else if (cambio == 1)
+  {
+    contador -= sensor;
+  }
+  return contador;
+}
+
+int cambiarTiempo(int tiempo,int sensor)
+{
+  if (sensor >= 10 && sensor <= 15)
+  {
+    tiempo = 150;
+  }
+  else if (sensor > 15 && sensor <= 25)
+  {
+    tiempo = 250;
+  }
+  else if (sensor > 25)
+  {
+    tiempo = 350;
+  }
+}
+
+void numerosContador(int contador)
+{
+  digitalWrite(PIN_A, LOW);
+  digitalWrite(PIN_B, LOW);
+  digitalWrite(PIN_C, LOW);
+  digitalWrite(PIN_D, LOW);
+  digitalWrite(PIN_E, LOW);
+  digitalWrite(PIN_F, LOW);
+  digitalWrite(PIN_G, LOW);
+  switch (contador)
+  {
+    case 1:
+    digitalWrite(PIN_A, LOW);
+	digitalWrite(PIN_B, HIGH);
+    digitalWrite(PIN_C, HIGH);
+	digitalWrite(PIN_D, LOW);
+    digitalWrite(PIN_E, LOW);
+	digitalWrite(PIN_F, LOW);
+    digitalWrite(PIN_G, LOW);
+    break;
+    case 2:
+    digitalWrite(PIN_A, HIGH);
+	digitalWrite(PIN_B, HIGH);
+    digitalWrite(PIN_C, LOW);
+	digitalWrite(PIN_D, HIGH);
+    digitalWrite(PIN_E, HIGH);
+	digitalWrite(PIN_F, LOW);
+    digitalWrite(PIN_G, HIGH);
+    break;
+    case 3:
+    digitalWrite(PIN_A, HIGH);
+	digitalWrite(PIN_B, HIGH);
+    digitalWrite(PIN_C, HIGH);
+	digitalWrite(PIN_D, HIGH);
+    digitalWrite(PIN_E, LOW);
+	digitalWrite(PIN_F, LOW);
+    digitalWrite(PIN_G, HIGH);
+    break;
+    case 4:
+    digitalWrite(PIN_A, LOW);
+	digitalWrite(PIN_B, HIGH);
+    digitalWrite(PIN_C, HIGH);
+	digitalWrite(PIN_D, LOW);
+    digitalWrite(PIN_E, LOW);
+	digitalWrite(PIN_F, HIGH);
+    digitalWrite(PIN_G, HIGH);
+    break;
+    case 5:
+    digitalWrite(PIN_A, HIGH);
+	digitalWrite(PIN_B, LOW);
+    digitalWrite(PIN_C, HIGH);
+	digitalWrite(PIN_D, HIGH);
+    digitalWrite(PIN_E, LOW);
+	digitalWrite(PIN_F, HIGH);
+    digitalWrite(PIN_G, HIGH);
+    break;
+    case 6:
+    digitalWrite(PIN_A, HIGH);
+	digitalWrite(PIN_B, LOW);
+    digitalWrite(PIN_C, HIGH);
+	digitalWrite(PIN_D, HIGH);
+    digitalWrite(PIN_E, HIGH);
+	digitalWrite(PIN_F, HIGH);
+    digitalWrite(PIN_G, HIGH);
+    break;
+    case 7:
+    digitalWrite(PIN_A, HIGH);
+	digitalWrite(PIN_B, HIGH);
+    digitalWrite(PIN_C, HIGH);
+	digitalWrite(PIN_D, LOW);
+    digitalWrite(PIN_E, LOW);
+	digitalWrite(PIN_F, LOW);
+    digitalWrite(PIN_G, LOW);
+    break;
+    case 8:
+    digitalWrite(PIN_A, HIGH);
+	digitalWrite(PIN_B, HIGH);
+    digitalWrite(PIN_C, HIGH);
+	digitalWrite(PIN_D, HIGH);
+    digitalWrite(PIN_E, HIGH);
+	digitalWrite(PIN_F, HIGH);
+    digitalWrite(PIN_G, HIGH);
+    break;
+    case 9:
+    digitalWrite(PIN_A, HIGH);
+	digitalWrite(PIN_B, HIGH);
+    digitalWrite(PIN_C, HIGH);
+	digitalWrite(PIN_D, LOW);
+    digitalWrite(PIN_E, LOW);
+	digitalWrite(PIN_F, HIGH);
+    digitalWrite(PIN_G, HIGH);
+    break;
+    case 0:
+    digitalWrite(PIN_A, HIGH);
+	digitalWrite(PIN_B, HIGH);
+    digitalWrite(PIN_C, HIGH);
+	digitalWrite(PIN_D, HIGH);
+    digitalWrite(PIN_E, HIGH);
+	digitalWrite(PIN_F, HIGH);
+    digitalWrite(PIN_G, LOW);
+    break;
+  }
+}
+
+void prenderDisplay(int numDisplay)
+{
+  if (numDisplay == LEDUNIDAD)
+  {
+    digitalWrite(LEDUNIDAD, LOW);
+    digitalWrite(LEDDECENA, HIGH);
+    delay(TIEMPODISPLAY);
+  }
+  else if (numDisplay == LEDDECENA)
+  {
+    digitalWrite(LEDDECENA, LOW);
+    digitalWrite(LEDUNIDAD, HIGH);
+    delay(TIEMPODISPLAY);
+  }
+  else
+  {
+    digitalWrite(LEDDECENA, HIGH);
+    digitalWrite(LEDUNIDAD, HIGH);
+    delay(TIEMPODISPLAY);
+  }
+}
+
+void mostrarContador(int contador)
+{
+  prenderDisplay(OFF);
+  numerosContador(contador/10);
+  prenderDisplay(LEDDECENA);
+  prenderDisplay(OFF);
+  numerosContador(contador - 10*((int)contador/10));
+  prenderDisplay(LEDUNIDAD);
+}
+
+int pulsadorEstado(void)
+{
+  sumarContador = digitalRead(PULSADOR_MAS);
+  restarContador = digitalRead(PULSADOR_MENOS);
+
+  if (sumarContador)
+  {
+    sumarAnterior = 1;
+  }
+  if (restarContador)
+  {
+    restarAnterior = 1;
+  }
+  if (sumarContador == 0 && sumarContador != sumarAnterior)
+  {
+    sumarAnterior = sumarContador;
+    return PULSADOR_MAS;
+  }
+  else if (restarContador == 0 && restarContador != restarAnterior)
+  {
+    restarAnterior = restarContador;
+    return PULSADOR_MENOS;
+  }
+  return 0;
+}
+
+bool esPrimo(int contador)
+{
+  if (contador <= 1)
+  {
+    return false;
+  }
+  for (int i = 2; i <= contador / 2;i++)
+  { 
+    if (contador % i == 0)
+    {
+      return false;
+    }
+  }
+  return true;
+}
